@@ -93,11 +93,11 @@
 		</property>
 		<property>
 			<field>adminID</field>
-			<value>仓库管理员ID</value>
+			<value>家政管理员ID</value>
 		</property>
 		<property>
 			<field>adminName</field>
-			<value>仓库管理员名字</value>
+			<value>家政管理员名字</value>
 		</property>
 	</entity>
 	

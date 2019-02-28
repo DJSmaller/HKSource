@@ -26,21 +26,21 @@ public interface RepositoryMapper {
 	
 	/**
 	 * 选择指定 Repository ID 的 Repository 记录
-	 * @param repositoryID 仓库ID
+	 * @param repositoryID 家政ID
 	 * @return 返回指定的Repository
 	 */
 	Repository selectByID(Integer repositoryID);
 	
 	/**
 	 * 选择指定 repository Address 的 repository 记录
-	 * @param address 仓库地址
+	 * @param address 家政地址
 	 * @return 返回指定的Repository 
 	 */
 	List<Repository> selectByAddress(String address);
 	
 	/**
 	 * 插入一条新的 Repository 记录
-	 * @param repository 仓库信息
+	 * @param repository 家政信息
 	 */
 	void insert(Repository repository);
 	
@@ -52,13 +52,13 @@ public interface RepositoryMapper {
 	
 	/**
 	 * 更新 Repository 记录
-	 * @param repository 仓库信息
+	 * @param repository 家政信息
 	 */
 	void update(Repository repository);
 	
 	/**
 	 * 删除指定 Repository ID 的 Repository 记录
-	 * @param repositoryID 仓库ID
+	 * @param repositoryID 家政ID
 	 */
 	void deleteByID(Integer repositoryID);
 }

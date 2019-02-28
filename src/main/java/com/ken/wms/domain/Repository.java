@@ -12,8 +12,8 @@ public class Repository {
 	private String status;// 仓库状态
 	private String area;// 仓库面积
 	private String desc;// 仓库描述
-	private Integer adminID;//仓库管理员ID
-	private String adminName; //仓库管理员名字
+	private Integer adminID;//家政管理员ID
+	private String adminName; //家政管理员名字
 
 	public Integer getAdminID() {
 		return adminID;

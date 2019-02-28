@@ -248,7 +248,7 @@ public class GoodsManageHandler {
         String fileName = "goodsInfo.xlsx";
 
         List<Goods> goodsList = null;
-        Map<String, Object> queryResult = query(searchType, keyWord, -1, -1);
+        Map<String, Object> queryResult = query(searchType, keyWord, 0,10000);
 
         if (queryResult != null) {
             goodsList = (List<Goods>) queryResult.get("data");

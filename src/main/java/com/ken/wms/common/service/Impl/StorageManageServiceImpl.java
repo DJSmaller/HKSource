@@ -5,9 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.ken.wms.common.service.Interface.StorageManageService;
 import com.ken.wms.common.util.ExcelUtil;
 import com.ken.wms.dao.GoodsMapper;
+import com.ken.wms.dao.HousekeepingStaffMapper;
 import com.ken.wms.dao.RepositoryMapper;
 import com.ken.wms.dao.StorageMapper;
 import com.ken.wms.domain.Goods;
+import com.ken.wms.domain.HousekeepingStaff;
 import com.ken.wms.domain.Repository;
 import com.ken.wms.domain.Storage;
 import com.ken.wms.exception.StorageManageServiceException;
@@ -38,54 +40,44 @@ public class StorageManageServiceImpl implements StorageManageService {
     @Autowired
     private RepositoryMapper repositoryMapper;
     @Autowired
+    private HousekeepingStaffMapper housekeepingStaffMapper;
+    @Autowired
     private ExcelUtil excelUtil;
 
-    /**
-     * 返回所有的库存记录
-     *
-     * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
-     */
-    @Override
-    public Map<String, Object> selectAll(Integer repository) throws StorageManageServiceException {
-        return selectAll(repository, -1, -1);
-    }
+//    /**
+//     * 返回所有的保姆信息
+//     *
+//     * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
+//     */
+//    @Override
+//    public Map<String, Object> selectAll(Integer repository) throws StorageManageServiceException {
+//        return selectAll(repository, 0, 1000000);
+//    }
 
     /**
-     * 分页返回所有的库存记录
+     * 分页返回所有保姆信息
      *
      * @param offset 分页偏移值
      * @param limit  分页大小
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
-    public Map<String, Object> selectAll(Integer repositoryID, int offset, int limit) throws StorageManageServiceException {
+    public Map<String, Object> selectAll( int offset, int limit) throws StorageManageServiceException {
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-        List<Storage> storageList;
+        List<HousekeepingStaff> storageList;
         long total = 0;
-        boolean isPagination = true;
-
-        // validate
-        if (offset < 0 || limit < 0)
-            isPagination = false;
-
         // query
         try {
-            if (isPagination) {
-                PageHelper.offsetPage(offset, limit);
-                storageList = storageMapper.selectAllAndRepositoryID(repositoryID);
-                if (storageList != null) {
-                    PageInfo<Storage> pageInfo = new PageInfo<>(storageList);
-                    total = pageInfo.getTotal();
-                } else
-                    storageList = new ArrayList<>();
+            PageHelper.offsetPage(offset, limit);
+            storageList = housekeepingStaffMapper.selectAll();
+            if (storageList != null) {
+                PageInfo<HousekeepingStaff> pageInfo = new PageInfo<>(storageList);
+                total = pageInfo.getTotal();
             } else {
-                storageList = storageMapper.selectAllAndRepositoryID(repositoryID);
-                if (storageList != null)
-                    total = storageList.size();
-                else
-                    storageList = new ArrayList<>();
+                storageList = new ArrayList<>();
             }
+
         } catch (PersistenceException e) {
             throw new StorageManageServiceException(e);
         }
@@ -103,7 +95,7 @@ public class StorageManageServiceImpl implements StorageManageService {
      */
     @Override
     public Map<String, Object> selectByGoodsID(Integer goodsID, Integer repository) throws StorageManageServiceException {
-        return selectByGoodsID(goodsID, repository, -1, -1);
+        return selectByGoodsID(goodsID, repository, 0,10000);
     }
 
     /**
@@ -160,7 +152,7 @@ public class StorageManageServiceImpl implements StorageManageService {
      */
     @Override
     public Map<String, Object> selectByGoodsName(String goodsName, Integer repository) throws StorageManageServiceException {
-        return selectByGoodsName(goodsName, repository, -1, -1);
+        return selectByGoodsName(goodsName, repository, 0,10000);
     }
 
     /**
@@ -175,7 +167,7 @@ public class StorageManageServiceImpl implements StorageManageService {
     public Map<String, Object> selectByGoodsName(String goodsName, Integer repositoryID, int offset, int limit) throws StorageManageServiceException {
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-        List<Storage> storageList;
+        List<HousekeepingStaff> storageList;
         long total = 0;
         boolean isPagination = true;
 
@@ -187,18 +179,21 @@ public class StorageManageServiceImpl implements StorageManageService {
         try {
             if (isPagination) {
                 PageHelper.offsetPage(offset, limit);
-                storageList = storageMapper.selectByGoodsNameAndRepositoryID(goodsName, repositoryID);
+                storageList = housekeepingStaffMapper.selectByCity(goodsName);
                 if (storageList != null) {
-                    PageInfo<Storage> pageInfo = new PageInfo<>(storageList);
+                    PageInfo<HousekeepingStaff> pageInfo = new PageInfo<>(storageList);
                     total = pageInfo.getTotal();
-                } else
+                } else{
                     storageList = new ArrayList<>();
+                }
             } else {
-                storageList = storageMapper.selectByGoodsNameAndRepositoryID(goodsName, repositoryID);
-                if (storageList != null)
+                storageList = housekeepingStaffMapper.selectByCity(goodsName);
+                if (storageList != null){
                     total = storageList.size();
-                else
+                } else{
                     storageList = new ArrayList<>();
+
+                }
             }
         } catch (PersistenceException e) {
             throw new StorageManageServiceException(e);
@@ -217,7 +212,7 @@ public class StorageManageServiceImpl implements StorageManageService {
      */
     @Override
     public Map<String, Object> selectByGoodsType(String goodsType, Integer repositoryID) throws StorageManageServiceException {
-        return selectByGoodsType(goodsType, repositoryID, -1, -1);
+        return selectByGoodsType(goodsType, repositoryID, 0,10000);
     }
 
     /**

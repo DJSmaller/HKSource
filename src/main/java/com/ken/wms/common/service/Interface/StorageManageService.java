@@ -3,6 +3,7 @@ package com.ken.wms.common.service.Interface;
 
 import com.ken.wms.domain.Storage;
 import com.ken.wms.exception.StorageManageServiceException;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -16,21 +17,21 @@ import java.util.Map;
  */
 public interface StorageManageService {
 
-    /**
-     * 返回所有的库存记录
-     *
-     * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
-     */
-    Map<String, Object> selectAll(Integer repositoryID) throws StorageManageServiceException;
+//    /**
+//     * 返回所有的库存记录
+//     *
+//     * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
+//     */
+//    Map<String, Object> selectAll(Integer repositoryID) throws StorageManageServiceException;
 
     /**
-     * 分页返回所有的库存记录
+     * 分页返回所有的保姆信息
      *
      * @param offset 分页偏移值
      * @param limit  分页大小
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
-    Map<String, Object> selectAll(Integer repositoryID, int offset, int limit) throws StorageManageServiceException;
+    Map<String, Object> selectAll(int offset, int limit) throws StorageManageServiceException;
 
     /**
      * 返回指定货物ID的库存记录

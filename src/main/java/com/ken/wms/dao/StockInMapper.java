@@ -39,17 +39,17 @@ public interface StockInMapper {
     List<StockInDO> selectByGoodID(Integer goodID);
 
     /**
-     * 选择指定仓库ID相关的入库记录
+     * 选择指定家政ID相关的入库记录
      *
-     * @param repositoryID 指定的仓库ID
-     * @return 返回指定仓库相关的入库记录
+     * @param repositoryID 指定的家政ID
+     * @return 返回指定家政相关的入库记录
      */
     List<StockInDO> selectByRepositoryID(Integer repositoryID);
 
     /**
-     * 选择指定仓库ID以及指定日期范围内的入库记录
+     * 选择指定家政ID以及指定日期范围内的入库记录
      *
-     * @param repositoryID 指定的仓库ID
+     * @param repositoryID 指定的家政ID
      * @param startDate    记录的起始日期
      * @param endDate      记录的结束日期
      * @return 返回所有符合要求的入库记录

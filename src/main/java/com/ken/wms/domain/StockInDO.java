@@ -36,7 +36,7 @@ public class StockInDO {
     private String goodName;
 
     /**
-     * 入库仓库ID
+     * 入库家政ID
      */
     private Integer repositoryID;
 

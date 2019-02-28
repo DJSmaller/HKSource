@@ -29,30 +29,30 @@ function quickAccessInit(){
 								<!--库存查询div-->
 								<div class="col-md-4 col-sm-4">
 									<a href="javascript:void(0)" class="thumbnail shortcut"> <img
-										src="media/icons/stock_search-512.png" alt="库存查询"
+										src="media/icons/hosekeepp1.svg" alt="库存查询"
 										class="img-rounded link" style="width: 150px; height: 150px;">
 										<div class="caption">
-											<h3 class="title">库存查询</h3>
+											<h3 class="title">打扫卫生</h3>
 										</div>
 									</a>
 								</div>
 								<!--货物入库div-->
 								<div class="col-md-4 col-sm-4">
 									<a href="javascript:void(0)" class="thumbnail shortcut"> <img
-										src="media/icons/stock_in-512.png" alt="货物入库"
+										src="media/icons/hosekeepp2.svg" alt="货物入库"
 										class="img-rounded link" style="width: 150px; height: 150px;">
 										<div class="caption">
-											<h3 class="title">货物入库</h3>
+											<h3 class="title">保姆服务</h3>
 										</div>
 									</a>
 								</div>
 								<!--货物出库div-->
 								<div class="col-md-4 col-sm-4">
 									<a href="javascript:void(0)" class="thumbnail shortcut"> <img
-										src="media/icons/stock_out-512.png" alt="货物出库"
+										src="media/icons/hosekeepp3.svg" alt="货物出库"
 										class="img-rounded link" style="width: 150px; height: 150px;">
 										<div class="caption">
-											<h3 class="title">货物出库</h3>
+											<h3 class="title">月嫂服务</h3>
 										</div>
 									</a>
 								</div>

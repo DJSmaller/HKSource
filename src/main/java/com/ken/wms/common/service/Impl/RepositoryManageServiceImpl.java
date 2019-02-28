@@ -9,6 +9,8 @@ import com.ken.wms.domain.*;
 import com.ken.wms.exception.RepositoryManageServiceException;
 import com.ken.wms.util.aop.UserOperation;
 import org.apache.ibatis.exceptions.PersistenceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +29,8 @@ import java.util.Map;
 @Service
 public class RepositoryManageServiceImpl implements RepositoryService {
 
+    public static final Logger logger = LoggerFactory.getLogger(RepositoryManageServiceImpl.class);
+
     @Autowired
     private RepositoryMapper repositoryMapper;
     @Autowired
@@ -39,6 +43,8 @@ public class RepositoryManageServiceImpl implements RepositoryService {
     private StorageMapper storageMapper;
     @Autowired
     private RepositoryAdminMapper repositoryAdminMapper;
+    @Autowired
+    private HousekeepingStaffMapper housekeepingStaffMapper;
 
     /**
      * 返回指定 repository ID 的仓库记录
@@ -52,7 +58,6 @@ public class RepositoryManageServiceImpl implements RepositoryService {
         Map<String, Object> resultSet = new HashMap<>();
         List<Repository> repositories = new ArrayList<>();
         long total = 0;
-
         // 查詢
         Repository repository;
         try {
@@ -125,11 +130,11 @@ public class RepositoryManageServiceImpl implements RepositoryService {
      */
     @Override
     public Map<String, Object> selectByAddress(String address) throws RepositoryManageServiceException {
-        return selectByAddress(-1, -1, address);
+        return selectByAddress(0, 10000, address);
     }
 
     /**
-     * 分页查询仓库记录
+     * 分页查询保姆信息
      *
      * @param offset 分页的偏移值
      * @param limit  分页的大小
@@ -137,50 +142,42 @@ public class RepositoryManageServiceImpl implements RepositoryService {
      */
     @Override
     public Map<String, Object> selectAll(int offset, int limit) throws RepositoryManageServiceException {
+        logger.info("#####  分页查询保姆信息 |start offset ,{} ,limit ,{}",offset,limit);
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-        List<Repository> repositories;
+        List<HousekeepingStaff> housekeepingStaffs  = new ArrayList<>();
         long total = 0;
-        boolean isPagination = true;
-
-        // validate
-        if (offset < 0 || limit < 0)
-            isPagination = false;
-
-        //query
         try {
-            if (isPagination) {
-                PageHelper.offsetPage(offset, limit);
-                repositories = repositoryMapper.selectAll();
-                if (repositories != null) {
-                    PageInfo<Repository> pageInfo = new PageInfo<>(repositories);
-                    total = pageInfo.getTotal();
-                } else
-                    repositories = new ArrayList<>();
+            if (offset==-1|| limit == -1){
+                offset = 0;
+                limit = 100000;
+
+            }
+            PageHelper.offsetPage(offset, limit);
+            housekeepingStaffs = housekeepingStaffMapper.selectAll();
+            if (housekeepingStaffs != null) {
+                PageInfo<HousekeepingStaff> pageInfo = new PageInfo<>(housekeepingStaffs);
+                total = pageInfo.getTotal();
             } else {
-                repositories = repositoryMapper.selectAll();
-                if (repositories != null)
-                    total = repositories.size();
-                else
-                    repositories = new ArrayList<>();
+                housekeepingStaffs = new ArrayList<>();
             }
         } catch (PersistenceException e) {
             throw new RepositoryManageServiceException(e);
         }
-
-        resultSet.put("data", repositories);
+        resultSet.put("data", housekeepingStaffs);
         resultSet.put("total", total);
+        logger.info("#####  分页查询保姆信息 |end result {}",resultSet);
         return resultSet;
     }
 
     /**
-     * 查询所有的仓库记录
+     * 查询所有保姆信息
      *
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
     public Map<String, Object> selectAll() throws RepositoryManageServiceException {
-        return selectAll(-1, -1);
+        return selectAll(0, 100000);
     }
 
     /**
@@ -272,7 +269,7 @@ public class RepositoryManageServiceImpl implements RepositoryService {
             if (storageRecords != null && !storageRecords.isEmpty())
                 return false;
 
-            // 检查是否已指派仓库管理员
+            // 检查是否已指派家政管理员
             RepositoryAdmin repositoryAdmin = repositoryAdminMapper.selectByRepositoryID(repositoryId);
             if (repositoryAdmin != null)
                 return false;
@@ -347,7 +344,7 @@ public class RepositoryManageServiceImpl implements RepositoryService {
     }
 
     /**
-     * 查询所有未指派仓库管理员的仓库记录
+     * 查询所有未指派家政管理员的仓库记录
      *
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */

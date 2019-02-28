@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ken.wms.dao.HousekeepingStaffMapper">
+  <resultMap id="BaseResultMap" type="com.ken.wms.domain.HousekeepingStaff">
+    <id column="staff_id" jdbcType="BIGINT" property="staffId" />
+    <result column="staff_name" jdbcType="VARCHAR" property="staffName" />
+    <result column="staff_phone" jdbcType="VARCHAR" property="staffPhone" />
+    <result column="staff_address" jdbcType="VARCHAR" property="staffAddress" />
+    <result column="staff_age" jdbcType="VARCHAR" property="staffAge" />
+    <result column="staff_city" jdbcType="VARCHAR" property="staffCity" />
+    <result column="staff_type" jdbcType="VARCHAR" property="staffType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    staff_id, staff_name, staff_phone, staff_address, staff_age, staff_city, staff_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from housekeeping_staff
+    where staff_id = #{staffId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from housekeeping_staff
+  </select>
+
+  <select id="selectByCity" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from housekeeping_staff
+    where staff_city = #{staffCity}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from housekeeping_staff
+    where staff_id = #{staffId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ken.wms.domain.HousekeepingStaff">
+    insert into housekeeping_staff (staff_id, staff_name, staff_phone, 
+      staff_address, staff_age, staff_city, 
+      staff_type)
+    values (#{staffId,jdbcType=BIGINT}, #{staffName,jdbcType=VARCHAR}, #{staffPhone,jdbcType=VARCHAR}, 
+      #{staffAddress,jdbcType=VARCHAR}, #{staffAge,jdbcType=VARCHAR}, #{staffCity,jdbcType=VARCHAR}, 
+      #{staffType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ken.wms.domain.HousekeepingStaff">
+    insert into housekeeping_staff
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="staffId != null">
+        staff_id,
+      </if>
+      <if test="staffName != null">
+        staff_name,
+      </if>
+      <if test="staffPhone != null">
+        staff_phone,
+      </if>
+      <if test="staffAddress != null">
+        staff_address,
+      </if>
+      <if test="staffAge != null">
+        staff_age,
+      </if>
+      <if test="staffCity != null">
+        staff_city,
+      </if>
+      <if test="staffType != null">
+        staff_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="staffId != null">
+        #{staffId,jdbcType=BIGINT},
+      </if>
+      <if test="staffName != null">
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhone != null">
+        #{staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="staffAddress != null">
+        #{staffAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="staffAge != null">
+        #{staffAge,jdbcType=VARCHAR},
+      </if>
+      <if test="staffCity != null">
+        #{staffCity,jdbcType=VARCHAR},
+      </if>
+      <if test="staffType != null">
+        #{staffType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ken.wms.domain.HousekeepingStaff">
+    update housekeeping_staff
+    <set>
+      <if test="staffName != null">
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhone != null">
+        staff_phone = #{staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="staffAddress != null">
+        staff_address = #{staffAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="staffAge != null">
+        staff_age = #{staffAge,jdbcType=VARCHAR},
+      </if>
+      <if test="staffCity != null">
+        staff_city = #{staffCity,jdbcType=VARCHAR},
+      </if>
+      <if test="staffType != null">
+        staff_type = #{staffType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where staff_id = #{staffId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ken.wms.domain.HousekeepingStaff">
+    update housekeeping_staff
+    set staff_name = #{staffName,jdbcType=VARCHAR},
+      staff_phone = #{staffPhone,jdbcType=VARCHAR},
+      staff_address = #{staffAddress,jdbcType=VARCHAR},
+      staff_age = #{staffAge,jdbcType=VARCHAR},
+      staff_city = #{staffCity,jdbcType=VARCHAR},
+      staff_type = #{staffType,jdbcType=VARCHAR}
+    where staff_id = #{staffId,jdbcType=BIGINT}
+  </update>
+</mapper>

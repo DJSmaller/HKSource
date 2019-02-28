@@ -247,7 +247,7 @@ public class SupplierManageHandler {
         // 根据查询类型进行查询
         List<Supplier> suppliers = null;
         Map<String, Object> queryResult;
-        queryResult = query(searchType, keyWord, -1, -1);
+        queryResult = query(searchType, keyWord, 0,10000);
 
         if (queryResult != null) {
             suppliers = (List<Supplier>) queryResult.get("data");

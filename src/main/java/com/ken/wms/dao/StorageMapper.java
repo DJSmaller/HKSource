@@ -22,10 +22,10 @@ public interface StorageMapper {
 	List<Storage> selectAllAndRepositoryID(@Param("repositoryID") Integer repositoryID);
 	
 	/**
-	 * 选择指定货物ID和仓库ID的库存信息
+	 * 选择指定货物ID和家政ID的库存信息
 	 * @param goodsID 货物ID
 	 * @param repositoryID 库存ID
-	 * @return 返回所有指定货物ID和仓库ID的库存信息
+	 * @return 返回所有指定货物ID和家政ID的库存信息
 	 */
 	List<Storage> selectByGoodsIDAndRepositoryID(@Param("goodsID") Integer goodsID,
 												 @Param("repositoryID") Integer repositoryID);
@@ -72,15 +72,15 @@ public interface StorageMapper {
 	void deleteByGoodsID(Integer goodsID);
 	
 	/**
-	 * 删除指定仓库的库存信息
-	 * @param repositoryID 仓库ID
+	 * 删除指定家政的库存信息
+	 * @param repositoryID 家政ID
 	 */
 	void deleteByRepositoryID(Integer repositoryID);
 	
 	/**
-	 * 删除指定仓库中的指定货物的库存信息
+	 * 删除指定家政中的指定货物的库存信息
 	 * @param goodsID 货物ID
-	 * @param repositoryID 仓库ID
+	 * @param repositoryID 家政ID
 	 */
 	void deleteByRepositoryIDAndGoodsID(@Param("goodsID") Integer goodsID, @Param("repositoryID") Integer repositoryID);
 }

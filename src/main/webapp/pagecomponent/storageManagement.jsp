@@ -30,15 +30,9 @@
 			if (type == "所有") {
 				$("#search_input_type").attr("readOnly", "true");
 				search_type_storage = "searchAll";
-			} else if (type == "货物ID") {
+			}  else if(type = "区域"){
 				$("#search_input_type").removeAttr("readOnly");
-				search_type_storage = "searchByGoodsID";
-			} else if (type == "货物名称") {
-				$("#search_input_type").removeAttr("readOnly");
-				search_type_storage = "searchByGoodsName";
-			} else if(type = "货物类型"){
-				$("#search_input_type").removeAttr("readOnly");
-				search_type_storage = "searchByGoodsType";
+				search_type_storage = "searchByGoodsType"; // 变成服务城市
 			}else {
 				$("#search_input_type").removeAttr("readOnly");
 			}
@@ -48,30 +42,30 @@
 		})
 	}
 
-	// 仓库下拉框数据初始化，页面加载时完成
-	function repositoryOptionInit(){
-		$.ajax({
-			type : 'GET',
-			url : 'repositoryManage/getRepositoryList',
-			dataType : 'json',
-			contentType : 'application/json',
-			data:{
-				searchType : "searchAll",
-				keyWord : "",
-				offset : -1,
-				limit : -1
-			},
-			success : function(response){
-			    //组装option
-				$.each(response.rows,function(index,elem){
-					$('#search_input_repository').append("<option value='" + elem.id + "'>" + elem.id +"号仓库</option>");
-				})
-			},
-			error : function(response){
-			}
-		});
-		$('#search_input_repository').append("<option value='all'>请选择仓库</option>");
-	}
+	// // 仓库下拉框数据初始化，页面加载时完成
+	// function repositoryOptionInit(){
+	// 	$.ajax({
+	// 		type : 'GET',
+	// 		url : 'repositoryManage/getRepositoryList',
+	// 		dataType : 'json',
+	// 		contentType : 'application/json',
+	// 		data:{
+	// 			searchType : "searchAll",
+	// 			keyWord : "",
+	// 			offset : -1,
+	// 			limit : -1
+	// 		},
+	// 		success : function(response){
+	// 		    //组装option
+	// 			$.each(response.rows,function(index,elem){
+	// 				$('#search_input_repository').append("<option value='" + elem.id + "'>" + elem.id +"号仓库</option>");
+	// 			})
+	// 		},
+	// 		error : function(response){
+	// 		}
+	// 	});
+	// 	$('#search_input_repository').append("<option value='all'>请选择仓库</option>");
+	// }
 
 	// 搜索动作
 	function searchAction() {
@@ -101,37 +95,33 @@
 						{
 							columns : [
 									{
-										field : 'goodsID',
-										title : '货物ID'
+										field : 'staffId',
+										title : '员工ID'
 									//sortable: true
 									},
 									{
-										field : 'goodsName',
-										title : '货物名称'
+										field : 'staffName',
+										title : '员工姓名'
 									},
 									{
-										field : 'goodsType',
-										title : '货物类型'
+										field : 'staffPhone',
+										title : '家政员工电话'
 									},
 									{
-										field : 'goodsSize',
-										title : '货物尺寸',
-										visible : false
+										field : 'staffAddress',
+										title : '地址',
 									},
 									{
-										field : 'goodsValue',
-										title : '货物价值',
-										visible : false
+										field : 'staffAge',
+										title : '年龄',
 									},
 									{
-										field : 'repositoryID',
-										title : '仓库ID'
-									},
-									{
-										field : 'number',
-										title : '库存数量'
-									},
-									{
+										field : 'staffType',
+										title : '保姆类型'
+									},{
+										field : 'staffCity',
+										title : '家政人员服务城市'
+									}, {
 										field : 'operation',
 										title : '操作',
 										formatter : function(value, row, index) {
@@ -509,7 +499,7 @@
 </script>
 <div class="panel panel-default">
 	<ol class="breadcrumb">
-		<li>库存信息管理</li>
+		<li>家政人员管理</li>
 	</ol>
 	<div class="panel-body">
 		<div class="row">
@@ -520,10 +510,8 @@
 						<span id="search_type">查询方式</span> <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="javascript:void(0)" class="dropOption">货物ID</a></li>
-						<li><a href="javascript:void(0)" class="dropOption">货物名称</a></li>
-						<li><a href="javascript:void(0)" class="dropOption">货物类型</a></li>
 						<li><a href="javascript:void(0)" class="dropOption">所有</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">区域</a></li>
 					</ul>
 				</div>
 			</div>
@@ -531,13 +519,13 @@
 				<div>
 					<div class="col-md-3 col-sm-3">
 						<input id="search_input_type" type="text" class="form-control"
-							placeholder="货物ID">
+							placeholder="区域">
 					</div>
-					<!--通过后台查询仓库信息-->
-					<div class="col-md-3 col-sm-4">
-						<select class="form-control" id="search_input_repository">
-						</select>
-					</div>
+					<%--<!--通过后台查询仓库信息-->--%>
+					<%--<div class="col-md-3 col-sm-4">--%>
+						<%--<select class="form-control" id="search_input_repository">--%>
+						<%--</select>--%>
+					<%--</div>--%>
 					<div class="col-md-2 col-sm-2">
 						<button id="search_button" class="btn btn-success">
 							<span class="glyphicon glyphicon-search"></span> <span>查询</span>
@@ -550,7 +538,7 @@
 		<div class="row" style="margin-top: 25px">
 			<div class="col-md-5">
 				<button class="btn btn-sm btn-default" id="add_storage">
-					<span class="glyphicon glyphicon-plus"></span> <span>添加库存信息</span>
+					<span class="glyphicon glyphicon-plus"></span> <span>添加保姆信息信息</span>
 				</button>
 				<button class="btn btn-sm btn-default" id="import_storage">
 					<span class="glyphicon glyphicon-import"></span> <span>导入</span>
@@ -876,7 +864,7 @@
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">编辑货物信息</h4>
+				<h4 class="modal-title" id="myModalLabel">编辑保姆信息</h4>
 			</div>
 			<div class="modal-body">
 				<!-- 模态框的内容 -->

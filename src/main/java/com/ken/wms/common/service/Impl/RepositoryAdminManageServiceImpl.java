@@ -12,6 +12,8 @@ import com.ken.wms.exception.UserInfoServiceException;
 import com.ken.wms.security.service.Interface.UserInfoService;
 import com.ken.wms.util.aop.UserOperation;
 import org.apache.ibatis.exceptions.PersistenceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +22,7 @@ import java.io.File;
 import java.util.*;
 
 /**
- * 仓库管理员管理 service 实现类
+ * 家政管理员管理 service 实现类
  *
  * @author Ken
  */
@@ -34,10 +36,13 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     @Autowired
     private UserInfoService userInfoService;
 
+    private Logger logger = LoggerFactory.getLogger(RepositoryAdminManageServiceImpl.class);
+
+
     /**
-     * 返回指定repository id 的仓库管理员记录
+     * 返回指定repository id 的家政管理员记录
      *
-     * @param repositoryAdminID 仓库管理员ID
+     * @param repositoryAdminID 家政管理员ID
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
@@ -66,11 +71,11 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 返回指定 repository address 的仓库管理员记录 支持查询分页以及模糊查询
+     * 返回指定 repository address 的家政管理员记录 支持查询分页以及模糊查询
      *
      * @param offset 分页的偏移值
      * @param limit  分页的大小
-     * @param name   仓库管理员的名称
+     * @param name   家政管理员的名称
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
@@ -108,18 +113,18 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 返回指定 repository Name 的仓库管理员记录 支持模糊查询
+     * 返回指定 repository Name 的家政管理员记录 支持模糊查询
      *
-     * @param name 仓库管理员名称
+     * @param name 家政管理员名称
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
     public Map<String, Object> selectByName(String name) {
-        return selectByName(-1, -1, name);
+        return selectByName(0, 100000, name);
     }
 
     /**
-     * 分页查询仓库管理员的记录
+     * 分页查询家政管理员的记录
      *
      * @param offset 分页的偏移值
      * @param limit  分页的大小
@@ -164,29 +169,29 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 查询所有仓库管理员的记录
+     * 查询所有家政管理员的记录
      *
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
     public Map<String, Object> selectAll() throws RepositoryAdminManageServiceException {
-        return selectAll(-1, -1);
+        return selectAll(0, 100000);
     }
 
     /**
-     * 添加仓库管理员信息
+     * 添加家政管理员信息
      *
-     * @param repositoryAdmin 仓库管理员信息
+     * @param repositoryAdmin 家政管理员信息
      * @return 返回一个boolean值，值为true代表添加成功，否则代表失败
      */
-    @UserOperation(value = "添加仓库管理员信息")
+    @UserOperation(value = "添加家政管理员信息")
     @Override
     public boolean addRepositoryAdmin(RepositoryAdmin repositoryAdmin) throws RepositoryAdminManageServiceException {
 
         if (repositoryAdmin != null) {
             if (repositoryAdminCheck(repositoryAdmin)) {
                 try {
-                    // 添加仓库管理员信息到数据库中
+                    // 添加家政管理员信息到数据库中
                     repositoryAdminMapper.insert(repositoryAdmin);
 
                     // 获取插入数据后返回的用户ID
@@ -194,14 +199,14 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
                     if (userID == null)
                         return false;
 
-                    // 为仓库管理员创建账户
+                    // 为家政管理员创建账户
                     UserInfoDTO userInfo = new UserInfoDTO();
                     userInfo.setUserID(userID);
                     userInfo.setUserName(repositoryAdmin.getName());
                     userInfo.setPassword(repositoryAdmin.getId().toString());
                     userInfo.setRole(new ArrayList<>(Collections.singletonList("commonsAdmin")));
 
-                    // 添加新创建的仓库管理员账户信息
+                    // 添加新创建的家政管理员账户信息
                     return userInfoService.insertUserInfo(userInfo);
 
                 } catch (PersistenceException | UserInfoServiceException e) {
@@ -213,26 +218,28 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 更新仓库管理员信息
+     * 更新家政管理员信息
      *
-     * @param repositoryAdmin 仓库管理员信息
+     * @param repositoryAdmin 家政管理员信息
      * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
      */
-    @UserOperation(value = "修改仓库管理员信息")
+    @UserOperation(value = "修改家政管理员信息")
     @Override
     public boolean updateRepositoryAdmin(RepositoryAdmin repositoryAdmin) throws RepositoryAdminManageServiceException {
 
         if (repositoryAdmin != null) {
             try {
                 // 检查属性
-                if (!repositoryAdminCheck(repositoryAdmin))
+                if (!repositoryAdminCheck(repositoryAdmin)){
                     return false;
 
+                }
                 // 若有指派的仓库则检查
                 if (repositoryAdmin.getRepositoryBelongID() != null) {
                     RepositoryAdmin rAdminFromDB = repositoryAdminMapper.selectByRepositoryID(repositoryAdmin.getRepositoryBelongID());
-                    if (rAdminFromDB != null && !Objects.equals(rAdminFromDB.getId(), repositoryAdmin.getId()))
+                    if (rAdminFromDB != null && !Objects.equals(rAdminFromDB.getId(), repositoryAdmin.getId())){
                         return false;
+                    }
                 }
 
                 // 更新
@@ -242,18 +249,18 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
             } catch (PersistenceException e) {
                 throw new RepositoryAdminManageServiceException(e);
             }
-        } else
-            return false;
+        }
+        return false;
 
     }
 
     /**
-     * 删除仓库管理员信息
+     * 删除家政管理员信息
      *
-     * @param repositoryAdminID 仓库管理员ID
+     * @param repositoryAdminID 家政管理员ID
      * @return 返回一个boolean值，值为true代表删除成功，否则代表失败
      */
-    @UserOperation(value = "删除仓库管理员信息")
+    @UserOperation(value = "删除家政管理员信息")
     @Override
     public boolean deleteRepositoryAdmin(Integer repositoryAdminID) throws RepositoryAdminManageServiceException {
 
@@ -261,29 +268,30 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
             // 判断是否已指派仓库
             RepositoryAdmin repositoryAdmin = repositoryAdminMapper.selectByID(repositoryAdminID);
             if (repositoryAdmin != null && repositoryAdmin.getRepositoryBelongID() == null) {
-
-                // 删除仓库管理员信息
+                // 删除家政管理员信息
                 repositoryAdminMapper.deleteByID(repositoryAdminID);
-
                 // 删除账户信息
                 userInfoService.deleteUserInfo(repositoryAdminID);
-
                 return true;
-            } else
-                return false;
+            }
         } catch (PersistenceException | UserInfoServiceException e) {
             throw new RepositoryAdminManageServiceException(e);
+        } catch (Exception e) {
+            logger.info("##### 删除家政管理员信息失败 e,{}", e);
+            return false;
         }
+        return false;
     }
 
+
     /**
-     * 为仓库管理员指派指定 ID 的仓库
+     * 为家政管理员指派指定 ID 的仓库
      *
-     * @param repositoryAdminID 仓库管理员ID
+     * @param repositoryAdminID 家政管理员ID
      * @param repositoryID      所指派的仓库ID
      * @return 返回一个 boolean 值，值为 true 表示仓库指派成功，否则表示失败
      */
-    @UserOperation(value = "指派仓库管理员")
+    @UserOperation(value = "指派家政管理员")
     @Override
     public boolean assignRepository(Integer repositoryAdminID, Integer repositoryID) throws RepositoryAdminManageServiceException {
 
@@ -300,12 +308,12 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 从文件中导入仓库管理员信息
+     * 从文件中导入家政管理员信息
      *
      * @param file 导入信息的文件
      * @return 返回一个Map，其中：key为total代表导入的总记录数，key为available代表有效导入的记录数
      */
-    @UserOperation(value = "导入仓库管理员信息")
+    @UserOperation(value = "导入家政管理员信息")
     @Override
     public Map<String, Object> importRepositoryAdmin(MultipartFile file) throws RepositoryAdminManageServiceException {
         // 初始化结果集
@@ -344,12 +352,12 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 导出仓库管理员信息到文件中
+     * 导出家政管理员信息到文件中
      *
      * @param repositoryAdmins 包含若干条 repository 信息的 List
      * @return Excel 文件
      */
-    @UserOperation(value = "导出仓库管理员信息")
+    @UserOperation(value = "导出家政管理员信息")
     @Override
     public File exportRepositoryAdmin(List<RepositoryAdmin> repositoryAdmins) {
         File file = null;
@@ -364,8 +372,8 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     /**
      * 检验 repositoryAdmin 信息是否有效
      *
-     * @param repositoryAdmin 仓库管理员信息
-     * @return 返回一个 boolean 值，若仓库管理员信息中要求非空均有值，返回 true，否则返回 false
+     * @param repositoryAdmin 家政管理员信息
+     * @return 返回一个 boolean 值，若家政管理员信息中要求非空均有值，返回 true，否则返回 false
      */
     private boolean repositoryAdminCheck(RepositoryAdmin repositoryAdmin) {
 
@@ -374,7 +382,7 @@ public class RepositoryAdminManageServiceImpl implements RepositoryAdminManageSe
     }
 
     /**
-     * 返回所属指定 repositoryID 的仓库管理员信息
+     * 返回所属指定 repositoryID 的家政管理员信息
      *
      * @param repositoryID 仓库ID 其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      * @return 返回一个Map，

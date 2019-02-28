@@ -142,7 +142,7 @@ public class CustomerManageHandler {
 
         // 获取客户信息
         Customer customer = null;
-        Map<String, Object> queryResult = query(SEARCH_BY_ID, customerID, -1, -1);
+        Map<String, Object> queryResult = query(SEARCH_BY_ID, customerID, 0,10000);
         if (queryResult != null) {
             customer = (Customer) queryResult.get("data");
             if (customer != null) {
@@ -251,7 +251,7 @@ public class CustomerManageHandler {
         String fileName = "customerInfo.xlsx";
 
         List<Customer> customers = null;
-        Map<String, Object> queryResult = query(searchType, keyWord, -1, -1);
+        Map<String, Object> queryResult = query(searchType, keyWord, 0,10000);
 
         if (queryResult != null) {
             customers = (List<Customer>) queryResult.get("data");

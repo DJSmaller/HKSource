@@ -223,8 +223,8 @@ function repositorySelectorInit(){
 		data : {
 			searchType : 'searchAll',
 			keyWord : '',
-			offset : -1,
-			limit : -1
+			offset : 0,
+			limit : 10000
 		},
 		success : function(response){
 			$.each(response.rows,function(index,elem){

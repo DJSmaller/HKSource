@@ -130,7 +130,7 @@ public class GoodsManageServiceImpl implements GoodsManageService {
      */
     @Override
     public Map<String, Object> selectByName(String goodsName) throws GoodsManageServiceException {
-        return selectByName(-1, -1, goodsName);
+        return selectByName(0,10000, goodsName);
     }
 
     /**
@@ -185,7 +185,7 @@ public class GoodsManageServiceImpl implements GoodsManageService {
      */
     @Override
     public Map<String, Object> selectAll() throws GoodsManageServiceException {
-        return selectAll(-1, -1);
+        return selectAll(0,10000);
     }
 
     /**

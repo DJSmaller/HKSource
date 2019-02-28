@@ -44,6 +44,7 @@ public class StorageManageHandler {
     private static final String SEARCH_BY_GOODS_NAME = "searchByGoodsName";
     private static final String SEARCH_BY_GOODS_TYPE = "searchByGoodsType";
     private static final String SEARCH_ALL = "searchAll";
+    private static final String NONE = "none";
 
     /**
      * 查询库存信息
@@ -56,46 +57,64 @@ public class StorageManageHandler {
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     private Map<String, Object> query(String searchType, String keyword, String repositoryBelong, int offset,
-                                      int limit) throws StorageManageServiceException {
+                                      int limit)  {
         Map<String, Object> queryResult = null;
-
-        switch (searchType) {
-            case SEARCH_ALL:
-                if (StringUtils.isNumeric(repositoryBelong)) {
-                    Integer repositoryID = Integer.valueOf(repositoryBelong);
-                    queryResult = storageManageService.selectAll(repositoryID, offset, limit);
-                } else {
-                    queryResult = storageManageService.selectAll(null, offset, limit);
-                }
-                break;
-            case SEARCH_BY_GOODS_ID:
-                if (StringUtils.isNumeric(keyword)) {
-                    Integer goodsID = Integer.valueOf(keyword);
+        try {
+            switch (searchType) {
+                case SEARCH_ALL:
                     if (StringUtils.isNumeric(repositoryBelong)) {
                         Integer repositoryID = Integer.valueOf(repositoryBelong);
-                        queryResult = storageManageService.selectByGoodsID(goodsID, repositoryID, offset, limit);
-                    } else
-                        queryResult = storageManageService.selectByGoodsID(goodsID, null, offset, limit);
-                }
-                break;
-            case SEARCH_BY_GOODS_TYPE:
-                if (StringUtils.isNumeric(repositoryBelong)) {
-                    Integer repositoryID = Integer.valueOf(repositoryBelong);
-                    queryResult = storageManageService.selectByGoodsType(keyword, repositoryID, offset, limit);
-                } else
-                    queryResult = storageManageService.selectByGoodsType(keyword, null, offset, limit);
-                break;
-            case SEARCH_BY_GOODS_NAME:
-                if (StringUtils.isNumeric(repositoryBelong)) {
-                    Integer repositoryID = Integer.valueOf(repositoryBelong);
-                    queryResult = storageManageService.selectByGoodsName(keyword, repositoryID, offset, limit);
-                } else
-                    queryResult = storageManageService.selectByGoodsName(keyword, null, offset, limit);
-                break;
-            default:
-                // do other thing
-                break;
+                        queryResult = storageManageService.selectAll( offset, limit);
+                    } else {
+                        queryResult = storageManageService.selectAll(offset, limit);
+                    }
+                    break;
+                case NONE:
+                    if (StringUtils.isNumeric(repositoryBelong)) {
+                        Integer repositoryID = Integer.valueOf(repositoryBelong);
+                        queryResult = storageManageService.selectAll(offset, limit);
+                    } else {
+                        queryResult = storageManageService.selectAll(offset, limit);
+
+                    }
+                    break;
+                case SEARCH_BY_GOODS_ID:
+                    if (StringUtils.isNumeric(keyword)) {
+                        Integer goodsID = Integer.valueOf(keyword);
+                        if (StringUtils.isNumeric(repositoryBelong)) {
+                            Integer repositoryID = Integer.valueOf(repositoryBelong);
+                            queryResult = storageManageService.selectByGoodsID(goodsID, repositoryID, offset, limit);
+                        } else {
+                            queryResult = storageManageService.selectByGoodsID(goodsID, null, offset, limit);
+                        }
+                    }
+                    break;
+                case SEARCH_BY_GOODS_TYPE: // 搜索服务城市
+                    if (StringUtils.isNumeric(repositoryBelong)) {
+                        Integer repositoryID = Integer.valueOf(repositoryBelong);
+                        queryResult = storageManageService.selectByGoodsType(keyword, repositoryID, offset, limit);
+                    } else {
+                        queryResult = storageManageService.selectByGoodsType(keyword, null, offset, limit);
+
+                    }
+                    break;
+                case SEARCH_BY_GOODS_NAME:
+                    if (StringUtils.isNumeric(repositoryBelong)) {
+                        Integer repositoryID = Integer.valueOf(repositoryBelong);
+                        queryResult = storageManageService.selectByGoodsName(keyword, repositoryID, offset, limit);
+                    } else {
+                        queryResult = storageManageService.selectByGoodsName(keyword, null, offset, limit);
+
+                    }
+                    break;
+                default:
+                    // do other thing
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
 
         return queryResult;
     }
@@ -128,8 +147,10 @@ public class StorageManageHandler {
         if (queryResult != null) {
             rows = (List<Storage>) queryResult.get("data");
             total = (long) queryResult.get("total");
-        } else
+        } else{
             rows = new ArrayList<>();
+
+        }
 
         // 设置 Response
         responseContent.setCustomerInfo("rows", rows);
@@ -339,7 +360,7 @@ public class StorageManageHandler {
             repositoryBelong = sessionRepositoryBelong.toString();
 
         List<Storage> storageList = null;
-        Map<String, Object> queryResult = query(searchType, keyword, repositoryBelong, -1, -1);
+        Map<String, Object> queryResult = query(searchType, keyword, repositoryBelong, 0,10000);
         if (queryResult != null)
             storageList = (List<Storage>) queryResult.get("data");
 

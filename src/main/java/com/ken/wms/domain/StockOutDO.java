@@ -36,7 +36,7 @@ public class StockOutDO {
     private String goodName;
 
     /**
-     * 出库仓库ID
+     * 出库家政ID
      */
     private Integer repositoryID;
 

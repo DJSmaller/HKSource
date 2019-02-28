@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 仓库管理员管理请求 Handler
+ * 家政管理员管理请求 Handler
  *
  * @author Ken
  */
@@ -77,7 +77,7 @@ public class RepositoryAdminManageHandler {
     }
 
     /**
-     * 查询仓库管理员信息
+     * 查询家政管理员信息
      *
      * @param searchType 查询类型
      * @param offset     分页偏移值
@@ -113,9 +113,9 @@ public class RepositoryAdminManageHandler {
     }
 
     /**
-     * 添加一条仓库管理员信息
+     * 添加一条家政管理员信息
      *
-     * @param repositoryAdmin 仓库管理员信息
+     * @param repositoryAdmin 家政管理员信息
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
     @RequestMapping(value = "addRepositoryAdmin", method = RequestMethod.POST)
@@ -135,11 +135,11 @@ public class RepositoryAdminManageHandler {
     }
 
     /**
-     * 查询指定 ID 的仓库管理员信息
+     * 查询指定 ID 的家政管理员信息
      *
-     * @param repositoryAdminID 仓库管理员ID
+     * @param repositoryAdminID 家政管理员ID
      * @return 返回一个map，其中：key 为 result 的值为操作的结果，包括：success 与 error；key 为 data
-     * 的值为仓库管理员信息
+     * 的值为家政管理员信息
      */
     @RequestMapping(value = "getRepositoryAdminInfo", method = RequestMethod.GET)
     public
@@ -164,11 +164,11 @@ public class RepositoryAdminManageHandler {
     }
 
     /**
-     * 更新仓库管理员信息
+     * 更新家政管理员信息
      *
-     * @param repositoryAdmin 仓库管理员信息
+     * @param repositoryAdmin 家政管理员信息
      * @return 返回一个map，其中：key 为 result 的值为操作的结果，包括：success 与 error；key 为 data
-     * 的值为仓库管理员信息
+     * 的值为家政管理员信息
      */
     @RequestMapping(value = "updateRepositoryAdmin", method = RequestMethod.POST)
     public
@@ -178,8 +178,7 @@ public class RepositoryAdminManageHandler {
         Response responseContent = responseUtil.newResponseInstance();
 
         // 更新
-        String result = repositoryAdminManageService.updateRepositoryAdmin(repositoryAdmin)
-                ? Response.RESPONSE_RESULT_SUCCESS : Response.RESPONSE_RESULT_ERROR;
+        String result = repositoryAdminManageService.updateRepositoryAdmin(repositoryAdmin) ? Response.RESPONSE_RESULT_SUCCESS : Response.RESPONSE_RESULT_ERROR;
 
         // 设置 Response
         responseContent.setResponseResult(result);
@@ -187,11 +186,11 @@ public class RepositoryAdminManageHandler {
     }
 
     /**
-     * 删除指定 ID 的仓库管理员信息
+     * 删除指定 ID 的家政管理员信息
      *
-     * @param repositoryAdminID 仓库ID
+     * @param repositoryAdminID 家政ID
      * @return 返回一个map，其中：key 为 result 的值为操作的结果，包括：success 与 error；key 为 data
-     * 的值为仓库管理员信息
+     * 的值为家政管理员信息
      */
     @RequestMapping(value = "deleteRepositoryAdmin", method = RequestMethod.GET)
     public
@@ -210,9 +209,9 @@ public class RepositoryAdminManageHandler {
     }
 
     /**
-     * 从文件中导入仓库管理员信息
+     * 从文件中导入家政管理员信息
      *
-     * @param file 保存有仓库管理员信息的文件
+     * @param file 保存有家政管理员信息的文件
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与
      * error；key为total表示导入的总条数；key为available表示有效的条数
      */
@@ -244,7 +243,7 @@ public class RepositoryAdminManageHandler {
     }
 
     /**
-     * 导出仓库管理员信息到文件中
+     * 导出家政管理员信息到文件中
      *
      * @param searchType 查询类型
      * @param keyWord    查询关键字
@@ -260,7 +259,7 @@ public class RepositoryAdminManageHandler {
 
         // 查询
         List<RepositoryAdmin> repositoryAdmins;
-        Map<String, Object> queryResult = query(keyWord, searchType, -1, -1);
+        Map<String, Object> queryResult = query(keyWord, searchType, 0,10000);
 
         if (queryResult != null)
             repositoryAdmins = (List<RepositoryAdmin>) queryResult.get("data");

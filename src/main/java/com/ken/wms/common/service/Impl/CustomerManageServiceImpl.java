@@ -124,7 +124,7 @@ public class CustomerManageServiceImpl implements CustomerManageService {
      */
     @Override
     public Map<String, Object> selectByName(String customerName) throws CustomerManageServiceException {
-        return selectByName(-1, -1, customerName);
+        return selectByName(0,10000, customerName);
     }
 
     /**
@@ -179,7 +179,7 @@ public class CustomerManageServiceImpl implements CustomerManageService {
      */
     @Override
     public Map<String, Object> selectAll() throws CustomerManageServiceException {
-        return selectAll(-1, -1);
+        return selectAll(0,10000);
     }
 
     /**

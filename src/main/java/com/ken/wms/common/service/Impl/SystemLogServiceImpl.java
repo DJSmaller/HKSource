@@ -71,7 +71,7 @@ public class SystemLogServiceImpl implements SystemLogService {
      */
     @Override
     public Map<String, Object> selectAccessRecord(Integer userID, String accessType, String startDateStr, String endDateStr) throws SystemLogServiceException {
-        return selectAccessRecord(userID, accessType, startDateStr, endDateStr, -1, -1);
+        return selectAccessRecord(userID, accessType, startDateStr, endDateStr, 0,10000);
     }
 
     /**
@@ -188,7 +188,7 @@ public class SystemLogServiceImpl implements SystemLogService {
      */
     @Override
     public Map<String, Object> selectUserOperationRecord(Integer userID, String startDateStr, String endDateStr) throws SystemLogServiceException {
-        return selectUserOperationRecord(userID, startDateStr, endDateStr, -1, -1);
+        return selectUserOperationRecord(userID, startDateStr, endDateStr, 0,10000);
     }
 
     /**

@@ -3,13 +3,13 @@ package com.ken.wms.domain;
 import java.sql.Date;
 
 /**
- * 仓库管理员信息
+ * 家政管理员信息
  * @author Ken
  *
  */
 public class RepositoryAdmin {
 
-	private Integer id;// 仓库管理员ID
+	private Integer id;// 家政管理员ID
 	private String name;// 姓名
 	private String sex;// 性别
 	private String tel;// 联系电话

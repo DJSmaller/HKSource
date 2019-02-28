@@ -45,7 +45,7 @@ public interface RepositoryService {
     Map<String, Object> selectByAddress(String address) throws RepositoryManageServiceException;
 
     /**
-     * 分页查询仓库记录
+     * 分页查询保姆记录
      *
      * @param offset 分页的偏移值
      * @param limit  分页的大小
@@ -61,7 +61,7 @@ public interface RepositoryService {
     Map<String, Object> selectAll() throws RepositoryManageServiceException;
 
     /**
-     * 查询所有未指派仓库管理员的仓库记录
+     * 查询所有未指派家政管理员的仓库记录
      *
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */

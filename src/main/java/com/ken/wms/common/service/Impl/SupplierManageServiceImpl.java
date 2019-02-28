@@ -120,7 +120,7 @@ public class SupplierManageServiceImpl implements SupplierManageService {
      */
     @Override
     public Map<String, Object> selectByName(String supplierName) throws SupplierManageServiceException {
-        return selectByName(-1, -1, supplierName);
+        return selectByName(0,10000, supplierName);
     }
 
     /**
@@ -175,7 +175,7 @@ public class SupplierManageServiceImpl implements SupplierManageService {
      */
     @Override
     public Map<String, Object> selectAll() throws SupplierManageServiceException {
-        return selectAll(-1, -1);
+        return selectAll(0,10000);
     }
 
     /**

@@ -139,7 +139,7 @@ public class StockRecordManageServiceImpl implements StockRecordManageService {
      */
     @Override
     public Map<String, Object> selectStockRecord(Integer repositoryID, String startDateStr, String endDateStr, String searchType) throws StockRecordManageServiceException {
-        return selectStockRecord(repositoryID, startDateStr, endDateStr, searchType, -1, -1);
+        return selectStockRecord(repositoryID, startDateStr, endDateStr, searchType, 0,10000);
     }
 
     /**

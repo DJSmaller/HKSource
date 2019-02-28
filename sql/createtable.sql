@@ -1,6 +1,6 @@
 create database wms_db
 DEFAULT CHARACTER SET utf8
-DEFAULT COLLATE utf8_general_ci;
+DEFAULT COLLATE utf8_bin;
 
 use wms_db;
 
@@ -16,7 +16,7 @@ create table wms_supplier
     SUPPLIER_EMAIL varchar(20) not null,
     SUPPLIER_ADDRESS varchar(30) not null,
     primary key(SUPPLIER_ID)
-)engine=innodb;
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建供应商信息表';
 
 # 创建客户信息表
 create table wms_customer
@@ -28,7 +28,7 @@ create table wms_customer
     CUSTOMER_EMAIL varchar(20) not null,
     CUSTOMER_ADDRESS varchar(30) not null,
     primary key(CUSTOMER_ID)
- )engine=innodb;
+ )ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建客户信息表';
  
  # 创建货物信息表
  create table wms_goods
@@ -39,9 +39,9 @@ create table wms_customer
     GOOD_SIZE varchar(20),
     GOOD_VALUE double not null,
     primary key(GOOD_ID)
- )engine=innodb;
+ )ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建货物信息表';
  
- # 创建仓库信息表
+ # 创建家政信息表
  create table wms_respository
  (
 	REPO_ID int not null auto_increment,
@@ -50,9 +50,9 @@ create table wms_customer
     REPO_AREA varchar(20) not null,
     REPO_DESC varchar(50),
     primary key(REPO_ID)
- )engine=innodb;
+ )ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建家政信息表';
  
- # 创建仓库管理员信息表
+ # 创建家政管理员信息表
  create table wms_repo_admin
  (
 	REPO_ADMIN_ID int not null auto_increment,
@@ -64,7 +64,7 @@ create table wms_customer
     REPO_ADMIN_REPOID int,
     primary key(REPO_ADMIN_ID),
     foreign key (REPO_ADMIN_REPOID) references wms_respository(REPO_ID)
-)engine=innodb;
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建家政管理员信息表';
 
 # 创建入库记录表
 create table wms_record_in
@@ -80,7 +80,7 @@ create table wms_record_in
     foreign key(RECORD_SUPPLIERID) references wms_supplier(SUPPLIER_ID),
     foreign key(RECORD_GOODID) references wms_goods(GOOD_ID),
     foreign key(RECORD_REPOSITORYID) references wms_respository(REPO_ID)
-)engine=innodb;
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建入库记录表';
 
 # 创建出库记录表
 create table wms_record_out
@@ -96,7 +96,7 @@ create table wms_record_out
     foreign key(RECORD_CUSTOMERID) references wms_customer(CUSTOMER_ID),
     foreign key(RECORD_GOODID) references wms_goods(GOOD_ID),
     foreign key(RECORD_REPOSITORYID) references wms_respository(REPO_ID)
-)engine=innodb;
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建出库记录表';
 
 # 创建库存记录表
 create table wms_record_storage
@@ -107,7 +107,7 @@ create table wms_record_storage
     primary key(RECORD_GOODID),
     foreign key (RECORD_GOODID) references wms_goods(GOOD_ID),
     foreign key (RECORD_REPOSITORY) references wms_respository(REPO_ID)
-)engine=innodb;
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建库存记录表';
 
 # 创建系统用户信息表
 create table wms_user
@@ -116,7 +116,7 @@ create table wms_user
     USER_USERNAME varchar(30) not null,
     USER_PASSWORD varchar(40) not null,
     primary key (USER_ID)
-)engine=innodb;
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建系统用户信息表';
 
 # 创建用户角色表
 create table wms_roles
@@ -126,7 +126,7 @@ create table wms_roles
     ROLE_DESC varchar(30),
     ROLE_URL_PREFIX varchar(20) not null,
     primary key(ROLE_ID)
-)engine=innodb;
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建用户角色表';
 
 # 创建URL权限表
 create table wms_action
@@ -136,7 +136,7 @@ create table wms_action
     ACTION_DESC varchar(30),
     ACTION_PARAM varchar(50) not null,
     primary key(ACTION_ID)
-)engine=innodb;
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建URL权限表';
 
 # 用户 - 角色关联表
 create table wms_user_role
@@ -146,7 +146,7 @@ create table wms_user_role
     primary key(ROLE_ID,USER_ID),
     foreign key(ROLE_ID) references wms_roles(ROLE_ID),
     foreign key(USER_ID) references wms_user(USER_ID)
-)engine=innodb;
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户 - 角色关联表';
 
 # 角色 - URL权限关联表
 create table wms_role_action
@@ -156,7 +156,7 @@ create table wms_role_action
     primary key(ACTION_ID,ROLE_ID),
     foreign key(ROLE_ID) references wms_roles(ROLE_ID),
     foreign key(ACTION_ID) references wms_action(ACTION_ID)
-)engine=innodb;
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色 - URL权限关联表';
 
 # 系统登入登出记录表
 create table wms_access_record
@@ -167,7 +167,7 @@ create table wms_access_record
     ACCESS_TYPE varchar(30) not null,
     ACCESS_TIME datetime not null,
     ACCESS_IP varchar(45) not null
-);
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统登入登出记录表';
 
 # 用户系统操作记录表
 create table wms_operation_record
@@ -178,7 +178,7 @@ create table wms_operation_record
     OPERATION_NAME varchar(30) not null,
     OPERATION_TIME datetime not null,
     OPERATION_RESULT varchar(15) not null
-);
+)ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户系统操作记录表';;
 
 
 # 导入数据
@@ -207,10 +207,10 @@ INSERT INTO `wms_customer` VALUES (1214,'醴陵荣旗瓷业有限公司','陈娟
 # 导入货物信息
 INSERT INTO `wms_goods` VALUES (103,'五孔插座西门子墙壁开关','电器','86*86',1.85),(104,'陶瓷马克杯','陶瓷','9*9*11',3.5),(105,'精酿苹果醋','饮料','312ml',300);
 
-# 导入仓库信息
+# 导入家政信息
 INSERT INTO `wms_respository` VALUES (1003,'北京顺义南彩工业园区彩祥西路9号','可用','11000㎡','提供服务完整'),(1004,'广州白云石井石潭路大基围工业区','可用','1000㎡','物流极为便利'),(1005,' 香港北区文锦渡路（红桥新村）','可用','5000.00㎡',NULL);
 
-# 导入仓库管理员信息
+# 导入家政管理员信息
 INSERT INTO `wms_repo_admin` VALUES (1018,'王皓','女','12345874526','中国佛山','2016-12-09 00:00:00',1004),(1019,'李富荣','男','1234','广州','2016-12-07 00:00:00',1003);
 
 # 导入入库记录

@@ -27,10 +27,10 @@
 			if (type == "所有") {
 				$("#search_input").attr("readOnly", "true");
 				search_type_repository = "searchAll";
-			} else if (type == "仓库ID") {
+			} else if (type == "家政ID") {
 				$("#search_input").removeAttr("readOnly");
 				search_type_repository = "searchByID";
-			} else if (type == "仓库地址") {
+			} else if (type == "家政地址") {
 				$("#search_input").removeAttr("readOnly");
 				search_type_repository = "searchByAddress";
 			} else {
@@ -69,16 +69,16 @@
 							columns : [
 									{
 										field : 'id',
-										title : '仓库ID'
+										title : '家政ID'
 									//sortable: true
 									},
 									{
 										field : 'address',
-										title : '仓库地址'
+										title : '家政地址'
 									},
 									{
 										field : 'adminName',
-										title : '仓库管理员'
+										title : '家政管理员'
 									},
 									{
 										field : 'status',
@@ -150,7 +150,7 @@
 		$('#repository_desc_edit').val(row.desc);
 	}
 
-	// 添加仓库模态框数据校验
+	// 添加家政模态框数据校验
 	function bootstrapValidatorInit() {
 		$("#repository_form,#repository_form_edit").bootstrapValidator({
 			message : 'This is not valid',
@@ -164,21 +164,21 @@
 				repository_address : {
 					validators : {
 						notEmpty : {
-							message : '仓库地址不能为空'
+							message : '家政地址不能为空'
 						}
 					}
 				},
 				repository_status : {
 					validators : {
 						notEmpty : {
-							message : '仓库状态不能为空'
+							message : '家政状态不能为空'
 						}
 					}
 				},
 				repository_area : {
 					validators : {
 						notEmpty : {
-							message : '仓库面积不能为空'
+							message : '家政面积不能为空'
 						}
 					}
 				}
@@ -186,7 +186,7 @@
 		})
 	}
 
-	// 编辑仓库信息
+	// 编辑家政信息
 	function editRepositoryAction() {
 		$('#edit_modal_submit').click(
 				function() {
@@ -218,10 +218,10 @@
 							var msg;
 							if (response.result == "success") {
 								type = "success";
-								msg = "仓库信息更新成功";
+								msg = "家政信息更新成功";
 							} else if (resposne == "error") {
 								type = "error";
-								msg = "仓库信息更新失败"
+								msg = "家政信息更新失败"
 							}
 							infoModal(type, msg);
 							tableRefresh();
@@ -232,7 +232,7 @@
 				});
 	}
 
-	// 刪除仓库信息
+	// 刪除家政信息
 	function deleteRepositoryAction() {
 		$('#delete_confirm').click(function() {
 			var data = {

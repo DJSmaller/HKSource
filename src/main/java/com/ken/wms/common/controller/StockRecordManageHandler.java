@@ -40,7 +40,7 @@ public class StockRecordManageHandler {
      *
      * @param customerID   客户ID
      * @param goodsID      货物ID
-     * @param repositoryID 仓库ID
+     * @param repositoryID 家政ID
      * @param number       出库数量
      * @param request      http请求
      * @return 返回一个map，key为result的值表示操作是否成功
@@ -70,7 +70,7 @@ public class StockRecordManageHandler {
      *
      * @param supplierID   供应商ID
      * @param goodsID      货物ID
-     * @param repositoryID 仓库ID
+     * @param repositoryID 家政ID
      * @param number       入库数目
      * @param request      http 请求
      * @return 返回一个map，key为result的值表示操作是否成功
@@ -99,7 +99,7 @@ public class StockRecordManageHandler {
      * 查询出入库记录
      *
      * @param searchType      查询类型（查询所有或仅查询入库记录或仅查询出库记录）
-     * @param repositoryIDStr 查询记录所对应的仓库ID
+     * @param repositoryIDStr 查询记录所对应的家政ID
      * @param endDateStr      查询的记录起始日期
      * @param startDateStr    查询的记录结束日期
      * @param limit           分页大小

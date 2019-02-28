@@ -180,7 +180,7 @@
 </script>
 <div class="panel panel-default">
 	<ol class="breadcrumb">
-		<li>库存信息管理</li>
+		<li>从业人员信息管理</li>
 	</ol>
 	<div class="panel-body">
 		<div class="row">
@@ -191,10 +191,10 @@
 						<span id="search_type">查询方式</span> <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
+						<li><a href="javascript:void(0)" class="dropOption">所有</a></li>
 						<li><a href="javascript:void(0)" class="dropOption">货物ID</a></li>
 						<li><a href="javascript:void(0)" class="dropOption">货物名称</a></li>
 						<li><a href="javascript:void(0)" class="dropOption">货物类型</a></li>
-						<li><a href="javascript:void(0)" class="dropOption">所有</a></li>
 					</ul>
 				</div>
 			</div>
@@ -202,7 +202,7 @@
 				<div>
 					<div class="col-md-3 col-sm-3">
 						<input id="search_input_type" type="text" class="form-control"
-							placeholder="货物ID">
+							placeholder="所有">
 					</div>
 					<div class="col-md-2 col-sm-2">
 						<button id="search_button" class="btn btn-success">
