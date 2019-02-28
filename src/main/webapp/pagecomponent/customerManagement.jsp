@@ -74,12 +74,14 @@
 									},
 									{
 										field : 'name',
-										title : '客户名称'
+										title : '客户姓名'
 									},
 									{
-										field : 'personInCharge',
-										title : '负责人'
-									},
+										field : 'personInCharge',//
+										title : '负责人',
+										visible : false
+
+                                    },
 									{
 										field : 'tel',
 										title : '联系电话'
@@ -87,12 +89,12 @@
 									{
 										field : 'address',
 										title : '地址',
-										visible : false
+//										visible : false
 									},
 									{
 										field : 'email',
 										title : '电子邮件',
-										visible : false
+//										visible : false
 									},
 									{
 										field : 'operation',

@@ -27,6 +27,8 @@ create table wms_customer
     CUSTOMER_TEL varchar(20) not null,
     CUSTOMER_EMAIL varchar(20) not null,
     CUSTOMER_ADDRESS varchar(30) not null,
+  
+
     primary key(CUSTOMER_ID)
  )ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创建客户信息表';
  
@@ -221,3 +223,10 @@ INSERT INTO `wms_record_out` VALUES (7,1214,104,750,'2016-12-31 00:00:00','admin
 
 # 导入库存信息
 INSERT INTO `wms_record_storage` VALUES (103,1005,10000),(104,1003,1750),(105,1004,2000);
+
+
+ALTER TABLE wms_customer add CUSTOMER_SERVICE varchar(30) not null COMMENT '服务项 保姆、月嫂',
+    ALTER TABLE wms_customer add CUSTOMER_TYPE varchar(30) not null COMMENT '产品类型 住家、不住家、钟点',
+   ALTER TABLE  wms_customer add CUSTOMER_LEVEL varchar(30) not null COMMENT '线索等级 ABCD',
+    ALTER TABLE wms_customer add CUSTOMER_LABEL varchar(30) not null COMMENT '客户标签 普通用户、VIP',
+   ALTER TABLE  wms_customer add CUSTOMER_OTHER varchar(30) not null COMMENT '其他',
