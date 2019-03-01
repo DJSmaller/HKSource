@@ -212,7 +212,8 @@ public class CustomerManageServiceImpl implements CustomerManageService {
                         customerMapper.insert(customer);
                         return true;
                     }
-                } catch (PersistenceException e) {
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                     throw new CustomerManageServiceException(e);
                 }
             }

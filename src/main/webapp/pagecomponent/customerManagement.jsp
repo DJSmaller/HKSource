@@ -79,7 +79,7 @@
 									{
 										field : 'personInCharge',//
 										title : '负责人',
-										visible : false
+//										visible : false
 
                                     },
 									{
@@ -88,7 +88,7 @@
 									},
 									{
 										field : 'address',
-										title : '地址',
+										title : '服务地区',
 //										visible : false
 									},
 									{
@@ -96,6 +96,32 @@
 										title : '电子邮件',
 //										visible : false
 									},
+{
+										field : 'other',
+										title : '客户其他',
+//										visible : false
+									},
+{
+										field : 'label',
+										title : '客户标签',
+//										visible : false
+									},
+{
+										field : 'level',
+										title : '线索登记',
+//										visible : false
+									},
+{
+										field : 'type',
+										title : '服务类型',
+//										visible : false
+									},
+{
+										field : 'service',
+										title : '服务项',
+//										visible : false
+									},
+
 									{
 										field : 'operation',
 										title : '操作',
@@ -151,6 +177,12 @@
 		$('#customer_tel_edit').val(row.tel);
 		$('#customer_email_edit').val(row.email);
 		$('#customer_address_edit').val(row.address);
+
+		$('#customer_service_edit').val(row.service);
+		$('#customer_type_edit').val(row.type);
+		$('#customer_level_edit').val(row.level);
+		$('#customer_label_edit').val(row.label);
+		$('#customer_other_edit').val(row.other);
 	}
 
 	// 添加供应商模态框数据校验
@@ -224,7 +256,14 @@
 						personInCharge : $('#customer_person_edit').val(),
 						tel : $('#customer_tel_edit').val(),
 						email : $('#customer_email_edit').val(),
-						address : $('#customer_address_edit').val()
+						address : $('#customer_address_edit').val(),
+
+                        service : $('#customer_service_edit').val(),
+                        type : $('#customer_type_edit').val(),
+                        level : $('#customer_level_edit').val(),
+                        label : $('#customer_label_edit').val(),
+                        other : $('#customer_other_edit').val()
+
 					}
 
 					// ajax
@@ -301,7 +340,13 @@
 				personInCharge : $('#customer_person').val(),
 				tel : $('#customer_tel').val(),
 				email : $('#customer_email').val(),
-				address : $('#customer_address').val()
+				address : $('#customer_address').val(),
+
+                service : $('#customer_service').val(),
+                type : $('#customer_type').val(),
+                level : $('#customer_level').val(),
+                label : $('#customer_label').val(),
+                other : $('#customer_other').val()
 			}
 			// ajax
 			$.ajax({
@@ -330,7 +375,16 @@
 					$('#customer_tel').val("");
 					$('#customer_email').val("");
 					$('#customer_address').val("");
+
+					$('#customer_service').val("");
+					$('#customer_type').val("");
+					$('#customer_level').val("");
+					$('#customer_label').val("");
+					$('#customer_other').val("");
+
 					$('#customer_form').bootstrapValidator("resetForm", true);
+
+
 				},
 				error : function(response) {
 				}
@@ -609,6 +663,60 @@
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="customer_address"
 										name="customer_address" placeholder="联系地址">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>服务项:</span>
+								</label>
+								<div class="col-md-5 col-sm-5">
+									<select name="customer_service" class="form-control" id="customer_service">
+										<option value="保姆">保姆</option>
+										<option value="月嫂">月嫂</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>服务类型:</span>
+								</label>
+								<div class="col-md-5 col-sm-5">
+									<select name="customer_type" class="form-control" id="customer_type">
+										<option value="住家">住家</option>
+										<option value="不住家">不住家</option>
+										<option value="钟点">钟点</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>线索等级:</span>
+								</label>
+								<div class="col-md-5 col-sm-5">
+									<select name="customer_level" class="form-control" id="customer_level">
+										<option value="A">A</option>
+										<option value="B">B</option>
+										<option value="C">C</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>客户标签:</span>
+								</label>
+								<div class="col-md-5 col-sm-5">
+									<select name="customer_label" class="form-control" id="customer_label">
+										<option value="普通用户">普通用户</option>
+										<option value="VIP用户">VIP用户</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>跟进记录：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<input type="text" class="form-control"
+										   id="customer_other" name="customer_other"
+										   placeholder="跟进记录">
 								</div>
 							</div>
 						</form>
@@ -918,14 +1026,70 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>联系地址：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>服务地区：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control"
 										id="customer_address_edit" name="customer_address"
-										placeholder="联系地址">
+										placeholder="服务地区">
 								</div>
 							</div>
+
+
+							<div class="form-group">
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>服务项:</span>
+								</label>
+								<div class="col-md-5 col-sm-5">
+									<select name="customer_service" class="form-control" id="customer_service_edit">
+										<option value="保姆">保姆</option>
+										<option value="月嫂">月嫂</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>服务类型:</span>
+								</label>
+								<div class="col-md-5 col-sm-5">
+									<select name="customer_type" class="form-control" id="customer_type_edit">
+										<option value="住家">住家</option>
+										<option value="不住家">不住家</option>
+										<option value="钟点">钟点</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>线索等级:</span>
+								</label>
+								<div class="col-md-5 col-sm-5">
+									<select name="customer_level" class="form-control" id="customer_level_edit">
+										<option value="A">A</option>
+										<option value="B">B</option>
+										<option value="C">C</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-5 col-sm-5"> <span>客户标签:</span>
+								</label>
+								<div class="col-md-5 col-sm-5">
+									<select name="customer_label" class="form-control" id="customer_label_edit">
+										<option value="普通用户">普通用户</option>
+										<option value="VIP用户">VIP用户</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>跟进记录：</span>
+								</label>
+								<div class="col-md-8 col-sm-8">
+									<input type="text" class="form-control"
+										   id="customer_other_edit" name="customer_other"
+										   placeholder="跟进记录">
+								</div>
+							</div>
+
 						</form>
 					</div>
 					<div class="col-md-1 col-sm-1"></div>

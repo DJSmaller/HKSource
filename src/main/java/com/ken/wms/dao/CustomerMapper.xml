@@ -12,28 +12,24 @@
 		<result property="tel" column="CUSTOMER_TEL"/>
 		<result property="email" column="CUSTOMER_EMAIL"/>
 		<result property="address" column="CUSTOMER_ADDRESS"/>
+
+		<result property="service" column="CUSTOMER_SERVICE"/>
+		<result property="type" column="CUSTOMER_TYPE"/>
+		<result property="level" column="CUSTOMER_LEVEL"/>
+		<result property="label" column="CUSTOMER_LABEL"/>
+		<result property="other" column="CUSTOMER_OTHER"/>
 	</resultMap>
 
 	<select id="selectAll" resultMap="customer">
 		select
-			c.CUSTOMER_ID,
-			c.CUSTOMER_NAME,
-			c.CUSTOMER_PERSON,
-			c.CUSTOMER_TEL,
-			c.CUSTOMER_EMAIL,
-			c.CUSTOMER_ADDRESS
+			*
 		from
 			wms_customer c
 	</select>
 	
 	<select id="selectById" resultMap="customer">
 		select
-			c.CUSTOMER_ID,
-			c.CUSTOMER_NAME,
-			c.CUSTOMER_PERSON,
-			c.CUSTOMER_TEL,
-			c.CUSTOMER_EMAIL,
-			c.CUSTOMER_ADDRESS
+			*
 		from
 			wms_customer c
 		where
@@ -42,12 +38,7 @@
 	
 	<select id="selectByName" resultMap="customer">
 		select
-			c.CUSTOMER_ID,
-			c.CUSTOMER_NAME,
-			c.CUSTOMER_PERSON,
-			c.CUSTOMER_TEL,
-			c.CUSTOMER_EMAIL,
-			c.CUSTOMER_ADDRESS
+			*
 		from
 			wms_customer c
 		where
@@ -56,12 +47,7 @@
 	
 	<select id="selectApproximateByName" resultMap="customer">
 		select
-			c.CUSTOMER_ID,
-			c.CUSTOMER_NAME,
-			c.CUSTOMER_PERSON,
-			c.CUSTOMER_TEL,
-			c.CUSTOMER_EMAIL,
-			c.CUSTOMER_ADDRESS
+			*
 		from
 			wms_customer c
 		where
@@ -69,10 +55,12 @@
 	</select>
 	
 	<insert id="insert">
-		insert into wms_customer(CUSTOMER_NAME,CUSTOMER_PERSON,CUSTOMER_TEL,CUSTOMER_EMAIL,CUSTOMER_ADDRESS)
-		values (#{name},#{personInCharge},#{tel},#{email},#{address})
+		insert into wms_customer(CUSTOMER_NAME,CUSTOMER_PERSON,CUSTOMER_TEL,CUSTOMER_EMAIL,CUSTOMER_ADDRESS,CUSTOMER_SERVICE,CUSTOMER_TYPE,CUSTOMER_LEVEL,CUSTOMER_LABEL,CUSTOMER_OTHER)
+		values (#{name},#{personInCharge},#{tel},#{email},#{address},#{service},#{type},#{level},#{label},#{other})
 	</insert>
-	
+
+
+
 	<insert id="insertBatch">
 		insert into wms_customer(CUSTOMER_NAME,CUSTOMER_PERSON,CUSTOMER_TEL,CUSTOMER_EMAIL,CUSTOMER_ADDRESS)
 		values
@@ -89,7 +77,14 @@
 			CUSTOMER_PERSON = #{personInCharge},
 			CUSTOMER_TEL = #{tel},
 			CUSTOMER_EMAIL = #{email},
-			CUSTOMER_ADDRESS = #{address}
+			CUSTOMER_ADDRESS = #{address},
+
+
+			CUSTOMER_SERVICE = #{service},
+			CUSTOMER_TYPE = #{type},
+			CUSTOMER_LEVEL = #{level},
+			CUSTOMER_LABEL = #{label},
+			CUSTOMER_OTHER = #{other}
 		where
 			CUSTOMER_ID = #{id}
 	</update>

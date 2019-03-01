@@ -14,6 +14,54 @@ public class Customer {
 	private String email;// 电子邮件
 	private String address;// 地址
 
+
+	private String service;// 服务项
+	private String type;// 服务类型
+	private String level;// 线索登记
+	private String label;// 客户标签
+	private String other;// 客户其他
+
+
+	public String getService() {
+		return service;
+	}
+
+	public void setService(String service) {
+		this.service = service;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getOther() {
+		return other;
+	}
+
+	public void setOther(String other) {
+		this.other = other;
+	}
+
 	public Integer getId() {
 		return id;
 	}
