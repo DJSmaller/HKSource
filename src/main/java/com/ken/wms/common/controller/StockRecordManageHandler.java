@@ -68,7 +68,7 @@ public class StockRecordManageHandler {
     /**
      * 货物入库操作
      *
-     * @param supplierID   供应商ID
+     * @param supplierID   家政公司ID
      * @param goodsID      货物ID
      * @param repositoryID 家政ID
      * @param number       入库数目

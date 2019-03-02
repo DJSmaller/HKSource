@@ -8,7 +8,7 @@ package com.ken.wms.domain;
  */
 public class Supplier {
 
-	private Integer id;// 供应商ID
+	private Integer id;// 家政公司ID
 	private String name;// 供应商名
 	private String personInCharge;// 负责人
 	private String tel;// 联系电话

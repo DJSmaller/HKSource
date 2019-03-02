@@ -366,7 +366,7 @@ function infoModal(type, msg) {
 										<form action="" class="form-inline">
 											<div class="form-group">
 												<label for="" class="form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供应商：</label>
-												<input type="text" class="form-control" id="supplier_input" placeholder="请输入供应商名称">
+												<input type="text" class="form-control" id="supplier_input" placeholder="请输入家政公司名称">
 											</div>
 										</form>
 									</div>
@@ -412,7 +412,7 @@ function infoModal(type, msg) {
 										<div class="col-md-6 col-sm-6">
 											<div style="margin-top:5px">
 												<div class="col-md-6 col-sm-6">
-													<span for="" class="pull-right">供应商ID：</span>
+													<span for="" class="pull-right">家政公司ID：</span>
 												</div>
 												<div class="col-md-6 col-sm-6">
 													<span id="info_supplier_ID">-</span>

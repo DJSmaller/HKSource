@@ -23,9 +23,9 @@ public interface StockInMapper {
     List<StockInDO> selectAll();
 
     /**
-     * 选择指定供应商ID相关的入库记录
+     * 选择指定家政公司ID相关的入库记录
      *
-     * @param supplierID 指定的供应商ID
+     * @param supplierID 指定的家政公司ID
      * @return 返回指定供应商相关的入库记录
      */
     List<StockInDO> selectBySupplierId(Integer supplierID);

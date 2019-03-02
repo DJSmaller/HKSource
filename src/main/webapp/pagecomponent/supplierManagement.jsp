@@ -27,10 +27,10 @@
 			if (type == "所有") {
 				$("#search_input").attr("readOnly", "true");
 				search_type_supplier = "searchAll";
-			} else if (type == "供应商ID") {
+			} else if (type == "家政公司ID") {
 				$("#search_input").removeAttr("readOnly");
 				search_type_supplier = "searchByID";
-			} else if (type == "供应商名称") {
+			} else if (type == "家政公司名称") {
 				$("#search_input").removeAttr("readOnly");
 				search_type_supplier = "searchByName";
 			} else {
@@ -69,12 +69,12 @@
 							columns : [
 									{
 										field : 'id',
-										title : '供应商ID'
+										title : '家政公司ID'
 									//sortable: true
 									},
 									{
 										field : 'name',
-										title : '供应商名称'
+										title : '家政公司名称'
 									},
 									{
 										field : 'personInCharge',
@@ -165,7 +165,7 @@
 				supplier_name : {
 					validators : {
 						notEmpty : {
-							message : '供应商名称不能为空'
+							message : '家政公司名称不能为空'
 						}
 					}
 				},
@@ -496,7 +496,7 @@
 </script>
 <div class="panel panel-default">
 	<ol class="breadcrumb">
-		<li>供应商信息管理</li>
+		<li>家政信息管理</li>
 	</ol>
 	<div class="panel-body">
 		<div class="row">
@@ -507,8 +507,8 @@
 						<span id="search_type">查询方式</span> <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="javascript:void(0)" class="dropOption">供应商ID</a></li>
-						<li><a href="javascript:void(0)" class="dropOption">供应商名称</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">家政公司ID</a></li>
+						<li><a href="javascript:void(0)" class="dropOption">家政公司名称</a></li>
 						<li><a href="javascript:void(0)" class="dropOption">所有</a></li>
 					</ul>
 				</div>
@@ -517,7 +517,7 @@
 				<div>
 					<div class="col-md-3 col-sm-4">
 						<input id="search_input" type="text" class="form-control"
-							placeholder="供应商ID">
+							placeholder="家政公司ID">
 					</div>
 					<div class="col-md-2 col-sm-3">
 						<button id="search_button" class="btn btn-success">
@@ -570,11 +570,11 @@
 						<form class="form-horizontal" role="form" id="supplier_form"
 							style="margin-top: 25px">
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>供应商名称：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>家政公司名称：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="supplier_name"
-										name="supplier_name" placeholder="供应商名称">
+										name="supplier_name" placeholder="家政公司名称">
 								</div>
 							</div>
 							<div class="form-group">
@@ -882,11 +882,11 @@
 						<form class="form-horizontal" role="form" id="supplier_form_edit"
 							style="margin-top: 25px">
 							<div class="form-group">
-								<label for="" class="control-label col-md-4 col-sm-4"> <span>供应商名称：</span>
+								<label for="" class="control-label col-md-4 col-sm-4"> <span>家政公司名称：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<input type="text" class="form-control" id="supplier_name_edit"
-										name="supplier_name" placeholder="供应商名称">
+										name="supplier_name" placeholder="家政公司名称">
 								</div>
 							</div>
 							<div class="form-group">

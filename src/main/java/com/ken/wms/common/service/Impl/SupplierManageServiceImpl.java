@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 供应商信息管理 service 实现类
+ * 家政信息管理 service 实现类
  *
  * @author Ken
  */
@@ -39,7 +39,7 @@ public class SupplierManageServiceImpl implements SupplierManageService {
     /**
      * 返回指定supplierID 的供应商记录
      *
-     * @param supplierId 供应商ID
+     * @param supplierId 家政公司ID
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     @Override
@@ -253,7 +253,7 @@ public class SupplierManageServiceImpl implements SupplierManageService {
     /**
      * 删除供应商记录
      *
-     * @param supplierId 供应商ID
+     * @param supplierId 家政公司ID
      * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
      */
     @UserOperation(value = "删除供应商信息")

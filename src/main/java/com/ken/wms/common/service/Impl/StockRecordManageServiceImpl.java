@@ -40,7 +40,7 @@ public class StockRecordManageServiceImpl implements StockRecordManageService {
     /**
      * 货物入库操作
      *
-     * @param supplierID   供应商ID
+     * @param supplierID   家政公司ID
      * @param goodsID      货物ID
      * @param repositoryID 入库仓库ID
      * @param number       入库数量
@@ -415,9 +415,9 @@ public class StockRecordManageServiceImpl implements StockRecordManageService {
     }
 
     /**
-     * 检查供应商ID对应的记录是否存在
+     * 检查家政公司ID对应的记录是否存在
      *
-     * @param supplierID 供应商ID
+     * @param supplierID 家政公司ID
      * @return 若存在则返回true，否则返回false
      */
     private boolean supplierValidate(Integer supplierID) throws StockRecordManageServiceException {

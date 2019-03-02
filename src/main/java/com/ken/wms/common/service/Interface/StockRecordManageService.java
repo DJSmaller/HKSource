@@ -14,7 +14,7 @@ public interface StockRecordManageService {
     /**
      * 货物入库操作
      *
-     * @param supplierID   供应商ID
+     * @param supplierID   家政公司ID
      * @param goodsID      货物ID
      * @param repositoryID 入库仓库ID
      * @param number       入库数量

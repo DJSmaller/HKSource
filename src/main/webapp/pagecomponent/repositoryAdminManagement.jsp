@@ -87,22 +87,22 @@
 									{
 										field : 'tel',
 										title : '联系电话',
-											visible : false
+//											visible : false
 									},
 									{
 										field : 'address',
 										title : '地址',
-										visible : false
+//										visible : false
 									},
 									{
 										field : 'birth',
 										title : '出生日期',
-										visible : false
+//										visible : false
 									},
-									{
-										field : "repositoryBelongID",
-										title : "所属仓库ID"
-									},
+//									{
+//										field : "repositoryBelongID",
+//										title : "所属仓库ID"
+//									},
 									{
 										field : 'operation',
 										title : '操作',
@@ -159,7 +159,7 @@
 		$('#repositoryAdmin_tel_edit').val(row.tel);
 		$('#repositoryAdmin_address_edit').val(row.address);
 		$('#repositoryAdmin_birth_edit').val(row.birth);
-		$('#repositoryAdmin_repoID_edit').text("");
+//		$('#repositoryAdmin_repoID_edit').text("");
 		
 		// 加载未分配仓库信息
 		if(row.repositoryBelongID != null){
@@ -261,7 +261,7 @@
 						tel : $('#repositoryAdmin_tel_edit').val(),
 						address : $('#repositoryAdmin_address_edit').val(),
 						birth : $('#repositoryAdmin_birth_edit').val(),
-						repositoryBelongID : $('#repositoryAdmin_repoID_edit').val()
+//						repositoryBelongID : $('#repositoryAdmin_repoID_edit').val()
 					}
 
 					// ajax
@@ -562,10 +562,11 @@
 								<span id="search_type">查询方式</span> <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="javascript:void(0)" class="dropOption">家政管理员ID</a></li>
-								<li><a href="javascript:void(0)" class="dropOption">家政管理员姓名</a></li>
-								<li><a href="javascript:void(0)" class="dropOption">仓库ID</a></li>
 								<li><a href="javascript:void(0)" class="dropOption">所有</a></li>
+
+								<li><a href="javascript:void(0)" class="dropOption">家政管理员ID</a></li>
+								<%--<li><a href="javascript:void(0)" class="dropOption">家政管理员姓名</a></li>--%>
+								<%--<li><a href="javascript:void(0)" class="dropOption">仓库ID</a></li>--%>
 							</ul>
 						</div>
 					</div>
@@ -1012,15 +1013,15 @@
 									<input class="form_date form-control" value="" id="repositoryAdmin_birth_edit" name="repositoryAdmin_birth" placeholder="出生日期">
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="" class="control-label col-md-5 col-sm-5"> <span>所属仓库ID：</span>
-								</label>
-								<div class="col-md-7 col-sm-7">
-									<select name="" class="form-control" id="repositoryAdmin_repoID_edit">
-										<option value=""></option>
-									</select>
-								</div>
-							</div>
+							<%--<div class="form-group">--%>
+								<%--<label for="" class="control-label col-md-5 col-sm-5"> <span>所属仓库ID：</span>--%>
+								<%--</label>--%>
+								<%--<div class="col-md-7 col-sm-7">--%>
+									<%--<select name="" class="form-control" id="repositoryAdmin_repoID_edit">--%>
+										<%--<option value=""></option>--%>
+									<%--</select>--%>
+								<%--</div>--%>
+							<%--</div>--%>
 							<div class="form-group hide" id="repositoryInfo">
 								<div class="col-md-2"></div>
 								<div class="col-md-10 alert alert-info">

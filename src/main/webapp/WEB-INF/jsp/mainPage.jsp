@@ -179,7 +179,7 @@ pageEncoding="UTF-8"%>
                                 <%--<ul class="list-group">--%>
                                     <%--<li class="list-group-item">--%>
                                         <%--<a href="javascript:void(0)" id="" class="menu_item"--%>
-                                           <%--name="pagecomponent/supplierManagement.jsp">供应商信息管理</a>--%>
+                                           <%--name="pagecomponent/supplierManagement.jsp">家政信息管理</a>--%>
                                     <%--</li>--%>
                                     <%--<li class="list-group-item">--%>
                                         <%--<a href="javascript:void(0)" id="" class="menu_item"--%>

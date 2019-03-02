@@ -16,12 +16,12 @@ public class StockInDO {
     private Integer id;
 
     /**
-     * 供应商ID
+     * 家政公司ID
      */
     private Integer supplierID;
 
     /**
-     * 供应商名称
+     * 家政公司名称
      */
     private String supplierName;
 

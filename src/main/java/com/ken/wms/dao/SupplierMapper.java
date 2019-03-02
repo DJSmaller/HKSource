@@ -21,14 +21,14 @@ public interface SupplierMapper {
 	
 	/**
 	 * 选择指定 id 的 Supplier
-	 * @param id 供应商ID
+	 * @param id 家政公司ID
 	 * @return 返回指定ID对应的供应商
 	 */
 	Supplier selectById(Integer id);
 	
 	/**
 	 * 选择指定 supplier name 的 Supplier
-	 * @param supplierName 供应商名称
+	 * @param supplierName 家政公司名称
 	 * @return 返回supplierName对应的供应商
 	 */
 	Supplier selectBuName(String supplierName);
@@ -63,13 +63,13 @@ public interface SupplierMapper {
 	
 	/**
 	 * 删除指定 id 的Supplier
-	 * @param id 供应商ID
+	 * @param id 家政公司ID
 	 */
 	void deleteById(Integer id);
 	
 	/**
 	 * 删除指定 supplierName 的 Supplier
-	 * @param supplierName 供应商名称
+	 * @param supplierName 家政公司名称
 	 */
 	void deleteByName(String supplierName);
 	

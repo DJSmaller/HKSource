@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 供应商信息管理请求 Handler
+ * 家政信息管理请求 Handler
  *
  * @author Ken
  */
@@ -128,7 +128,7 @@ public class SupplierManageHandler {
     /**
      * 查询指定 supplierID 供应商的信息
      *
-     * @param supplierID 供应商ID
+     * @param supplierID 家政公司ID
      * @return 返回一个map，其中：key 为 result 的值为操作的结果，包括：success 与 error；key 为 data
      * 的值为供应商信息
      */
@@ -179,7 +179,7 @@ public class SupplierManageHandler {
     /**
      * 删除供应商记录
      *
-     * @param supplierID 供应商ID
+     * @param supplierID 家政公司ID
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
     @RequestMapping(value = "deleteSupplier", method = RequestMethod.GET)

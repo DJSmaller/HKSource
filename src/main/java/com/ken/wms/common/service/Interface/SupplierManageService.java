@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 供应商信息管理 service
+ * 家政信息管理 service
  *
  * @author Ken
  */
@@ -19,7 +19,7 @@ public interface SupplierManageService {
     /**
      * 返回指定supplierID 的供应商记录
      *
-     * @param supplierId 供应商ID
+     * @param supplierId 家政公司ID
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     Map<String, Object> selectById(Integer supplierId) throws SupplierManageServiceException;
@@ -39,7 +39,7 @@ public interface SupplierManageService {
      * 返回指定 supplierName 的供应商记录
      * 支持模糊查询
      *
-     * @param supplierName supplierName 供应商名称
+     * @param supplierName supplierName 家政公司名称
      * @return 结果的一个Map，其中： key为 data 的代表记录数据；key 为 total 代表结果记录的数量
      */
     Map<String, Object> selectByName(String supplierName) throws SupplierManageServiceException;
@@ -79,7 +79,7 @@ public interface SupplierManageService {
     /**
      * 删除供应商记录
      *
-     * @param supplierId 供应商ID
+     * @param supplierId 家政公司ID
      * @return 返回一个boolean值，值为true代表更新成功，否则代表失败
      */
     boolean deleteSupplier(Integer supplierId);
